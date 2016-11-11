@@ -1,0 +1,13 @@
+<h2><%= @category.name %></h2>
+<ul>
+	<% @category.sub_categories.limit(5).each do |sub_category| %>
+		<li><h4><%= link_to sub_category.name, sub_category_path(sub_category.id) %></h4></li>
+			<ol>
+				<% sub_category.products.limit(5).each do |product| %>
+					<li><b><%= link_to product.name %></b><br/>
+						Rs. <%= product.price %>
+					</li><br/>
+				<% end %>
+			</ol>
+	<% end %>
+</ul>

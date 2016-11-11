@@ -1,0 +1,9 @@
+<h2><%= @sub_category.name %></h2><%= link_to @sub_category.category.name, category_path(@sub_category.category.id) %>
+<ol>
+	<% @sub_category.products.limit(20).each do |product| %>
+		<li><h3><%= link_to product.name, product_path(product.id) %></h3>
+			<b>Price : Rs <%= product.price %></b>
+			<p><%= product.description %></p>
+		</li>
+	<% end %>
+</ol>

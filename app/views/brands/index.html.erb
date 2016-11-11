@@ -1,0 +1,8 @@
+<h2>List of brands</h2>
+<%= link_to "Add brand", new_brand_path %>
+<ol>
+	<% @brands.each do |brand| %>
+		<li><%= brand.name %>
+		<%= link_to "Edit", edit_brand_path(brand.id) %> | <%= link_to "Delete", brand_path(brand.id), method: :delete, data: {confirm: "Are you sure"} %></li><br/>
+	<% end %>
+</ol>

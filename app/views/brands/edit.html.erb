@@ -1,0 +1,16 @@
+<h2>Edit brand</h2>
+<%= form_for @brand do |f| %>
+	<% if @brand.errors.any? %>
+		<div class = "errors" style = "color: red;">
+			<ul>
+				<% @brand.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<%= f.label :name %><br/><br/>
+	<%= f.text_field :name %><br/><br/>
+
+	<%= f.submit %>
+<% end %>

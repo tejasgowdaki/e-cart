@@ -1,0 +1,7 @@
+<h2>Products list</h2>
+<%= link_to "Add product", new_product_path %>
+<ol>
+	<% @products.each do |product| %>
+		<li><%= link_to product.name, product_path(product.id) %></li>
+	<% end %>
+</ol>
