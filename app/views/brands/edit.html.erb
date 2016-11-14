@@ -10,7 +10,8 @@
 		</div>
 	<% end %>
 	<%= f.label :name %><br/><br/>
-	<%= f.text_field :name %><br/><br/>
-
+	<%= f.text_field :name %><br/>
+	<%= f.label :categories %><br/>
+	<%= f.collection_check_boxes :category_ids, Category.all, :id, :name %><br/><br/>
 	<%= f.submit %>
 <% end %>

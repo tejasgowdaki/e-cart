@@ -1,0 +1,9 @@
+<h3>Size list</h3>
+<%= link_to "Add size", new_size_path %>
+<ol>
+	<% @sizes.each do |size| %>
+		<li>
+			<%= size.name %>	<%= link_to "Edit", edit_size_path(size.id) %> | <%= link_to "Delete", size_path(size.id), method: :delete, data: {confirm: "Are you sure"} %>
+		</li>
+	<% end %>
+</ol>

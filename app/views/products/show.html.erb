@@ -1,5 +1,8 @@
-<h3><%= @product.name %></h3><%= @product.brand.name %>, <%= link_to @product.sub_category.name, sub_category_path(@product.sub_category.id) %>, <%= link_to @product.category.name, category_path(@product.sub_category.id) %><br/><br/>
+<h3><%= @product.name %></h3><%= link_to @product.brand.name, brand_path(@product.brand.id) %>, <%= link_to @product.sub_category.name, sub_category_path(@product.sub_category.id) %>, <%= link_to @product.category.name, category_path(@product.sub_category.id) %><br/><br/>
 Price : <%= @product.price %><br/><br/>
+Sizes : <% @product.sizes.each do |size| %>
+			<%= size.name %>, 	
+		<% end %><br/><br/>
 Description : <%= @product.description %><br/><br/>
 <% if @product.availability_date > Date.today %>
 	<b>Available from : <%= @product.availability_date %></b>

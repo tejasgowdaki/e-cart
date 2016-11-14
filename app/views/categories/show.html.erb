@@ -4,7 +4,7 @@
 		<li><h4><%= link_to sub_category.name, sub_category_path(sub_category.id) %></h4></li>
 			<ol>
 				<% sub_category.products.limit(5).each do |product| %>
-					<li><b><%= link_to product.name %></b><br/>
+					<li><b><%= link_to product.name, product_path(product.id) %></b><br/>
 						Rs. <%= product.price %>
 					</li><br/>
 				<% end %>

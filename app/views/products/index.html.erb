@@ -2,6 +2,8 @@
 <%= link_to "Add product", new_product_path %>
 <ol>
 	<% @products.each do |product| %>
-		<li><%= link_to product.name, product_path(product.id) %></li>
+		<li><%= link_to product.name, product_path(product.id) %>
+			<%= link_to "Edit", edit_product_path(product.id) %> | <%= link_to "Delete", product_path(product.id), method: :delete, data: {confirm: "Are you sure"} %>
+		</li>
 	<% end %>
 </ol>

@@ -1,6 +1,6 @@
 class BrandCategory < ActiveRecord::Base
 
-	belongs_to :brands
-	belongs_to :categories
+	belongs_to :brand
+	belongs_to :category
 
 end

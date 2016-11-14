@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161111110602) do
+ActiveRecord::Schema.define(version: 20161113160422) do
 
   create_table "brand_categories", force: :cascade do |t|
     t.integer  "category_id"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 20161111110602) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "product_sizes", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "size_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -57,6 +64,16 @@ ActiveRecord::Schema.define(version: 20161111110602) do
     t.integer  "category_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "user_profiles", force: :cascade do |t|
+    t.string   "name"
+    t.date     "date_of_birth"
+    t.integer  "mobile"
+    t.string   "role"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "users", force: :cascade do |t|

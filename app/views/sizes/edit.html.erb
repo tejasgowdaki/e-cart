@@ -1,0 +1,8 @@
+<h3>Edit size details</h3>
+<%= form_for @size do |f| %>
+	<%= f.label :name %><br/>
+	<%= f.text_field :name %><br/>
+	<%= f.label :category_id %><br/>
+	<%= f.collection_select :category_id, Category.all, :id, :name %><br/><br/>
+	<%= f.submit %>
+<% end %>

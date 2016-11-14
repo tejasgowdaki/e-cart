@@ -17,6 +17,10 @@ class BrandsController < ApplicationController
 		end
 	end
 
+	def show
+		@brand = Brand.find(params[:id])
+	end
+
 	def edit
 		@brand = Brand.find(params[:id])
 	end
@@ -24,7 +28,7 @@ class BrandsController < ApplicationController
 	def update
 		@brand = Brand.find(params[:id])
 		if @brand.update_attributes(brand_param)
-			redirect_to brands_path, notice: "Successfully updated"
+			redirect_to brand_path(@brand.id), notice: "Successfully updated"
 		else
 			render	action: "edit"
 		end
@@ -40,7 +44,7 @@ class BrandsController < ApplicationController
 	private
 
 	def brand_param
-		params[:brand].permit(:name)
+		params[:brand].permit(:name, category_ids: [])
 	end
 
 end
