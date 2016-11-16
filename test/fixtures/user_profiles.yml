@@ -2,14 +2,12 @@
 
 one:
   name: MyString
-  date_of_birth: 2016-11-13
-  mobile: 1
+  date_of_birth: 2016-11-16
+  mobile: MyString
   role: MyString
-  user_id: 1
 
 two:
   name: MyString
-  date_of_birth: 2016-11-13
-  mobile: 1
+  date_of_birth: 2016-11-16
+  mobile: MyString
   role: MyString
-  user_id: 1

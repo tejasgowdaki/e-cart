@@ -1,0 +1,9 @@
+<h3>Users list</h3>
+<%= link_to "Add user", new_user_profile_path %>
+<ol>
+	<% @user_profiles.each do |user| %>
+		<li>
+			<%= link_to user.name, user_profile_path(user.id) %>	<%= link_to "Edit", edit_user_profile_path(user.id) %> | <%= link_to "Delete", user_profile_path(user.id), method: :delete, data: {confirm: "Are you sure"} %>
+		</li>
+	<% end %>
+</ol>
