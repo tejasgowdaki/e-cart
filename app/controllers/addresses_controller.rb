@@ -10,7 +10,7 @@ class AddressesController < ApplicationController
 
 	def create
 		@address = Address.new(address_param)
-		@address.user_profile_id = current_user.user_profile.id
+		@address.user_profile_id = User.find(current_user.id).user_profile.id
 		if @address.save
 			redirect_to user_profile_path(@address.user_profile_id)
 		else

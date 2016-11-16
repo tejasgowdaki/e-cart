@@ -10,6 +10,7 @@ class UserProfilesController < ApplicationController
 
 	def create
 		@user_profile = UserProfile.new(user_profile_param)
+		@user_profile.user_id = current_user.id
 		if @user_profile.save
 			redirect_to user_profiles_path
 		else

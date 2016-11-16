@@ -1,4 +1,14 @@
-<br/><%= @user_profile.name %><br/>
-<%= @user_profile.mobile %><br/>
-<%= @user_profile.date_of_birth %><br/>
+<br/>
+<b>Name</b> : <%= @user_profile.name %><br/>
+<b>Mobile</b> : <%= @user_profile.mobile %><br/>
+<b>Date of birth</b> : <%= @user_profile.date_of_birth %><br/>
 <%= link_to "Add address", new_address_path %>
+
+<ol>
+	<% @user_profile.addresses.each do |address| %>
+		<li><b><%= address.title %></b><br/>
+			<%= address.address %><br/>
+			<b>Landmark</b> - <%= address.landmark %>
+		</li>
+	<% end %>
+</ol>
