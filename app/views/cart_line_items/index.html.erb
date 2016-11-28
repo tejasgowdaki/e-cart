@@ -1,0 +1,7 @@
+<h3>Your products are ready to checkout</h3>
+<% @cart_line_items.each do |cart_line_item| %>
+	<b><%= cart_line_item.product.name %></b> <%= cart_line_item.product.sub_category.name %><br/>
+	Price : Rs. <%= cart_line_item.product.price %><br/>
+	Quantity : <%= cart_line_item.quantity %><br/>
+	Total Price : Rs. <%= cart_line_item.product.price * cart_line_item.quantity %><br/><br/>
+<% end %>

@@ -8,6 +8,19 @@ Description : <%= @product.description %><br/><br/>
 	<b>Available from : <%= @product.availability_date %></b>
 <% else %>
 	<b>Stock left : <%= @product.stock %></b>
+	<% if user_signed_in? %>
+		<%= form_for @cart_line_item do |f| %>
+			<%= f.label :quantity %>
+			<%= f.select :quantity, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] %>
+			<%= f.hidden_field :product_id, value: @product.id %>
+			<%= f.hidden_field :price, value: @product.price %>
+			<%= f.submit "Add to Cart" %>
+		<% end %>
+	<% else %>
+		<br/>
+		<%= link_to "Login", new_user_session_path %> / <%= link_to "Register", new_user_registration_path %> to add this item to your cart.
+	<% end %>
+
 <% end %><br/>
 
 <h3>Reviews</h3>
@@ -15,16 +28,19 @@ Description : <%= @product.description %><br/><br/>
 	<% @product.reviews.each do |review| %>
 		<li><b><%= review.user_profile.name %></b><br/><br/>
 			<b><%= review.title %></b><br/>
-			<b>Rating</b> - <%= review.rating %>/5<br/>
+			<b>Rating</b> - <%= review.rating %>/5
 			<p><%= review.body %></p>
-			<% if review.user_profile_id == current_user.user_profile.id %>
-				<%= link_to "Delete", review_path(review.id), method: :delete,alert: {confirm: "are you sure"} %>
+			<% if user_signed_in? %>
+				<% if review.user_profile_id == current_user.user_profile.id %>
+					<%= link_to "Delete", review_path(review.id), method: :delete,alert: {confirm: "are you sure"} %>
+				<% end %>
 			<% end %>
 		</li>
 	<% end %>
 </ol>
-<b>Add review</b>
+
 <% if user_signed_in? %>
+	<b>Add review</b>
 	<%= form_for @review do |f| %>
 		<% if @review.errors.any? %>
 			<div class = "errors" style = "color: red;">
@@ -46,6 +62,6 @@ Description : <%= @product.description %><br/><br/>
 		<%= f.submit "Save" %>
 	<% end %>
 <% else %>
-	<br/><br/>
-	<%= link_to "Login", new_user_session_path %> to add review.
+	<br/>
+	<%= link_to "Login", new_user_session_path %> / <%= link_to "Register", new_user_registration_path %> to add review.
 <% end %>
