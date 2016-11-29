@@ -1,5 +1,7 @@
 class CartLineItemsController < ApplicationController
 
+	before_action :authenticate_user!
+
 	def index
 		@cart_line_items = CartLineItem.where('user_profile_id = ?', current_user.user_profile.id)
 	end

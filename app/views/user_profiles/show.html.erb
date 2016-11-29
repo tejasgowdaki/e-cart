@@ -1,14 +1,16 @@
-<br/>
-<b>Name</b> : <%= @user_profile.name %><br/>
+<br/><br/>
+<b>Name</b> : <%= @user_profile.name.capitalize %><br/>
 <b>Mobile</b> : <%= @user_profile.mobile %><br/>
-<b>Date of birth</b> : <%= @user_profile.date_of_birth %><br/>
-<%= link_to "Add address", new_address_path %>
+<b>Date of birth</b> : <%= @user_profile.date_of_birth %><br/><br/>
 
+<b>Address(s)</b><br/>
+<%= link_to "Add address", new_address_path %><br/>
 <ol>
 	<% @user_profile.addresses.each do |address| %>
 		<li><b><%= address.title %></b><br/>
 			<%= address.address %><br/>
 			<b>Landmark</b> - <%= address.landmark %>
 		</li>
+		<br/>
 	<% end %>
 </ol>

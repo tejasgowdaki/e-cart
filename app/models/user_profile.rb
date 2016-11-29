@@ -4,6 +4,7 @@ class UserProfile < ActiveRecord::Base
 	has_many :addresses
 	has_many :reviews
 	has_many :cart_line_items
+	has_many :orders
 
 	validates_presence_of :name, :date_of_birth, :mobile
 	validates_numericality_of :mobile
