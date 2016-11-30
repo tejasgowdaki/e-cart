@@ -1,7 +1,63 @@
-<h3>Your products are ready to checkout</h3>
-<% @cart_line_items.each do |cart_line_item| %>
-	<b><%= cart_line_item.product.name %></b> <%= cart_line_item.product.sub_category.name %><br/>
-	Price : Rs. <%= cart_line_item.product.price %><br/>
-	Quantity : <%= cart_line_item.quantity %><br/>
-	Total Price : Rs. <%= cart_line_item.product.price * cart_line_item.quantity %><br/><br/>
+<h3>Your cart</h3>
+<% if @cart_line_items.empty? %>
+	<b>Sorry, your cart is empty</b>
+<% else %>
+	<%= link_to "Empty cart", cart_line_items_empty_cart_path, data: {confirm: "Are you sure"} %>
+	<br/><br/>
+	<table>
+		<thead>
+			<tr>
+				<th>Product</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Total price</th>
+				<th colspan="3"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% cart_total = 0 %>
+			<% @cart_line_items.each do |cart_line_item| %>
+				<tr>
+					<td><%= cart_line_item.product.name %></td>
+					<td><%= cart_line_item.product.price %></td>
+					<%= form_for cart_line_item do |line_item| %>
+						<td><%= line_item.select :quantity, [1,2,3,4,5,6,7,8,9,10] %></td>
+						<% sum = cart_line_item.product.price * cart_line_item.quantity %>
+						<td><%= sum %></td>
+						<% cart_total += sum %>
+						<td><%= line_item.submit "Update" %></td>
+					<% end %>
+					<td><%= link_to "Remove", cart_line_item_path(cart_line_item.id), method: :delete, data: {confirm: "Are you sure"} %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<br/>
+	<b>Total : Rs. <%= cart_total %></b>
 <% end %>
+<br/><br/>
+<%= form_for @order do |f| %>
+	<% if @order.errors.any? %>
+		<div class = "errors" style = "color: red;">
+			<ul>
+				<% @order.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<%= f.hidden_field :total, value: cart_total %>
+	<%= f.label :payment_mode %><br/>
+	<%= f.radio_button :payment_mode, "COD" %> Cash on delivery
+	<%= f.radio_button :payment_mode, "Net banking" %> Net banking
+	<%= f.radio_button :payment_mode, "Card" %> Card
+	<br/>
+	<%= f.label :address_id %><br/>
+	<% current_user.user_profile.addresses.each do |address| %>
+		<%= f.radio_button :address_id, address.id %> <%= address.title %>
+	<% end %>
+	<br/><br/>
+	<b><%= f.submit "Checkout" %></b>
+<% end %>
+<br/><br/>
+<%= link_to "Continue shopping", products_path %>

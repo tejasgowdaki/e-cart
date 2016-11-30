@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  resources :order_line_items
+  get '/cart_line_items/empty_cart'
+  resources :orders
   devise_for :users
 
   resources :brands
@@ -15,7 +19,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'sub_categories#index'
+   root 'products#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

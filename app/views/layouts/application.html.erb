@@ -10,7 +10,8 @@
 	<% if user_signed_in? %>
 	Welcome <%= current_user.user_profile.name.capitalize %> |
 	<%= link_to "My Profile", user_profile_path(current_user.user_profile) %> |
-	<%= link_to "My Cart", cart_line_items_path %> |
+	<%= link_to "My Cart (#{current_user.user_profile.cart_line_items.size})", cart_line_items_path %> |
+	<%= link_to "My Orders", order_line_items_path %> |
 	<%= link_to "Account Settings", edit_user_registration_path %> |
 	<%= link_to "Logout", destroy_user_session_path, method: :delete %>
 <% else %>

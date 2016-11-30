@@ -7,6 +7,7 @@ class Product < ActiveRecord::Base
 	has_many :sizes, through: :product_sizes
 	has_many :reviews
 	has_many :cart_line_items
+	has_many :order_line_items
 
 	validates_presence_of :name, :price, :description, :stock, :availability_date, :size_ids
 	validates_presence_of :category_id, :sub_category_id, :brand_id

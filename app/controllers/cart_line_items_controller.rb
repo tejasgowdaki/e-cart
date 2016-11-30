@@ -3,7 +3,8 @@ class CartLineItemsController < ApplicationController
 	before_action :authenticate_user!
 
 	def index
-		@cart_line_items = CartLineItem.where('user_profile_id = ?', current_user.user_profile.id)
+		@cart_line_items = current_user.user_profile.cart_line_items
+		@order = Order.new
 	end
 
 	def create
@@ -29,6 +30,11 @@ class CartLineItemsController < ApplicationController
 		@cart_line_item = CartLineItem.find(params[:id])
 		@cart_line_item.destroy
 		redirect_to cart_line_items_path
+	end
+
+	def empty_cart
+		current_user.user_profile.cart_line_items.delete_all
+		redirect_to :back
 	end
 
 	private
