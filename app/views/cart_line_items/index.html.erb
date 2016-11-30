@@ -34,30 +34,31 @@
 	</table>
 	<br/>
 	<b>Total : Rs. <%= cart_total %></b>
-<% end %>
-<br/><br/>
-<%= form_for @order do |f| %>
-	<% if @order.errors.any? %>
-		<div class = "errors" style = "color: red;">
-			<ul>
-				<% @order.errors.full_messages.each do |msg| %>
-					<li><%= msg %></li>
-				<% end %>
-			</ul>
-		</div>
-	<% end %>
-	<%= f.hidden_field :total, value: cart_total %>
-	<%= f.label :payment_mode %><br/>
-	<%= f.radio_button :payment_mode, "COD" %> Cash on delivery
-	<%= f.radio_button :payment_mode, "Net banking" %> Net banking
-	<%= f.radio_button :payment_mode, "Card" %> Card
-	<br/>
-	<%= f.label :address_id %><br/>
-	<% current_user.user_profile.addresses.each do |address| %>
-		<%= f.radio_button :address_id, address.id %> <%= address.title %>
-	<% end %>
 	<br/><br/>
-	<b><%= f.submit "Checkout" %></b>
+	<%= form_for @order do |f| %>
+		<% if @order.errors.any? %>
+			<div class = "errors" style = "color: red;">
+				<ul>
+					<% @order.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+		<%= f.hidden_field :total, value: cart_total %>
+		<%= f.label :payment_mode %><br/>
+		<%= f.radio_button :payment_mode, "COD" %> Cash on delivery
+		<%= f.radio_button :payment_mode, "Net banking" %> Net banking
+		<%= f.radio_button :payment_mode, "Card" %> Card
+		<br/>
+		<%= f.label :address_id %><br/>
+		<% current_user.user_profile.addresses.each do |address| %>
+			<%= f.radio_button :address_id, address.id %> <%= address.title %>
+		<% end %>
+		<br/><br/>
+		<b><%= f.submit "Checkout" %></b>
+	<% end %>
 <% end %>
+
 <br/><br/>
 <%= link_to "Continue shopping", products_path %>
