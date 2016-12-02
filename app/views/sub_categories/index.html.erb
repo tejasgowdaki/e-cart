@@ -1,7 +1,17 @@
 <h2>Sub category list</h2>
-<%= link_to "Add sub category", new_sub_category_path %>
+<% if can? :create, SubCategory.new %>
+	<%= link_to "Add sub category", new_sub_category_path %>
+<% end %>
 <ol>
 	<% @sub_categories.each do |sub_category| %>
-		<li><%= link_to sub_category.name, sub_category_path(sub_category.id) %></li>
+		<li>
+		<%= link_to sub_category.name, sub_category_path(sub_category.id) %>
+		<% if can? :update, sub_category %>
+			<%= link_to "Edit", edit_sub_category_path(sub_category.id) %>
+		<% end %>
+		<% if can? :destroy, sub_category %>
+			<%= link_to "Delete", sub_category_path(sub_category.id), method: :delete, data: {confirm: "Are you sure"} %>
+		<% end %>	
+		</li>
 	<% end %>
 </ol>

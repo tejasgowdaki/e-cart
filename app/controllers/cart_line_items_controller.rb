@@ -1,6 +1,7 @@
 class CartLineItemsController < ApplicationController
 
 	before_action :authenticate_user!
+	load_and_authorize_resource except: [:create]
 
 	def index
 		@cart_line_items = current_user.user_profile.cart_line_items
@@ -40,7 +41,7 @@ class CartLineItemsController < ApplicationController
 	private
 
 	def cart_line_item_param
-		params[:cart_line_item].permit(:price, :quantity, :product_id)
+		params.require(:cart_line_item).permit(:price, :quantity, :product_id)
 	end
 
 end

@@ -1,7 +1,10 @@
 class ProductsController < ApplicationController
 
+	before_action :authenticate_user!, except: [:index, :show]
+	load_and_authorize_resource
+
 	def index
-		@products = Product.all
+		@products = Product.all.limit(20)
 	end
 
 	def new

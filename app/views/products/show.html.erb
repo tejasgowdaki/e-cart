@@ -1,9 +1,23 @@
-<h3><%= @product.name %></h3><%= link_to @product.brand.name, brand_path(@product.brand.id) %>, <%= link_to @product.sub_category.name, sub_category_path(@product.sub_category.id) %>, <%= link_to @product.category.name, category_path(@product.sub_category.id) %><br/><br/>
+<h3><%= @product.name %></h3>
+
+<%= link_to @product.brand.name, brand_path(@product.brand.id) %>,
+<%= link_to @product.sub_category.name, sub_category_path(@product.sub_category.id) %>,
+<%= link_to @product.category.name, category_path(@product.sub_category.id) %>
+
+<br/><br/>
+
 Price : <%= @product.price %><br/><br/>
 Sizes : <% @product.sizes.each do |size| %>
 			<%= size.name %>, 	
-		<% end %><br/><br/>
-Description : <%= @product.description %><br/><br/>
+		<% end %>
+
+<br/><br/>
+
+
+Description : <%= @product.description %>
+
+<br/><br/>
+
 <% if @product.availability_date > Date.today %>
 	<b>Available from : <%= @product.availability_date %></b>
 <% else %>
@@ -13,15 +27,16 @@ Description : <%= @product.description %><br/><br/>
 			<%= f.label :quantity %>
 			<%= f.select :quantity, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] %>
 			<%= f.hidden_field :product_id, value: @product.id %>
-			<%= f.hidden_field :price, value: @product.price %>
+			<%= f.hidden_field :price, value: @product.price %><br/><br/>
 			<%= f.submit "Add to Cart" %>
 		<% end %>
 	<% else %>
 		<br/>
 		<%= link_to "Login", new_user_session_path %> / <%= link_to "Register", new_user_registration_path %> to add this item to your cart.
 	<% end %>
+<% end %>
 
-<% end %><br/>
+<br/>
 
 <h3>Reviews</h3>
 <ol>
@@ -31,7 +46,7 @@ Description : <%= @product.description %><br/><br/>
 			<b>Rating</b> - <%= review.rating %>/5
 			<p><%= review.body %></p>
 			<% if user_signed_in? %>
-				<% if review.user_profile_id == current_user.user_profile.id %>
+				<% if can? :destroy, review %>
 					<%= link_to "Delete", review_path(review.id), method: :delete,alert: {confirm: "are you sure"} %>
 				<% end %>
 			<% end %>
@@ -62,6 +77,9 @@ Description : <%= @product.description %><br/><br/>
 		<%= f.submit "Save" %>
 	<% end %>
 <% else %>
-	<br/>
-	<%= link_to "Login", new_user_session_path %> / <%= link_to "Register", new_user_registration_path %> to add review.
+
+<br/>
+
+<%= link_to "Login", new_user_session_path %> / <%= link_to "Register", new_user_registration_path %> to add review.
+
 <% end %>

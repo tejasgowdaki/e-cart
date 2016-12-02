@@ -1,10 +1,13 @@
 class OrderLineItemsController < ApplicationController
+
+  before_action :authenticate_user!
+  load_and_authorize_resource
   before_action :set_order_line_item, only: [:show, :edit, :update, :destroy]
 
   # GET /order_line_items
   # GET /order_line_items.json
   def index
-    @order_line_items = OrderLineItem.all
+    @order_line_items = current_user.user_profile.order_line_items
   end
 
   # GET /order_line_items/1

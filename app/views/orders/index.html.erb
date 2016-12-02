@@ -24,11 +24,8 @@
         <td><%= order.total %></td>
         <td><%= order.order_status %></td>
         <td><%= order.payment_mode %></td>
-        <td><%= order.user_id %></td>
+        <td><%= order.user_profile_id %></td>
         <td><%= order.address_id %></td>
-        <td><%= link_to 'Show', order %></td>
-        <td><%= link_to 'Edit', edit_order_path(order) %></td>
-        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -36,4 +33,3 @@
 
 <br>
 
-<%= link_to 'New Order', new_order_path %>

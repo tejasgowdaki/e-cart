@@ -1,4 +1,7 @@
 class ReviewsController < ApplicationController
+	
+	before_action :authenticate_user!, except: [:index, :show]
+	load_and_authorize_resource except: [:create]
 
 	def create
 		@review = Review.new(review_param)

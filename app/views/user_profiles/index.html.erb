@@ -1,9 +1,29 @@
-<h3>Users list</h3>
-<%= link_to "Add user", new_user_profile_path %>
-<ol>
-	<% @user_profiles.each do |user| %>
-		<li>
-			<%= link_to user.name, user_profile_path(user.id) %>	<%= link_to "Edit", edit_user_profile_path(user.id) %> | <%= link_to "Delete", user_profile_path(user.id), method: :delete, data: {confirm: "Are you sure"} %>
-		</li>
-	<% end %>
-</ol>
+<% if current_user.role? "admin" %>
+	<h3>Users list</h3>	
+	<ol>
+		<% @user_profiles.each do |user| %>
+			<li>
+				<% if can? :read, user %>
+					<%= link_to user.name, user_profile_path(user.id) %>
+				<% end %>	
+			</li>
+		<% end %>
+	</ol>	
+<% else %> 
+	<br/><br/>
+	<b>Name</b> : <%= current_user.user_profile.name.capitalize %><br/>
+	<b>Mobile</b> : <%= current_user.user_profile.mobile %><br/>
+	<b>Date of birth</b> : <%= current_user.user_profile.date_of_birth %><br/><br/>
+
+	<b>Address(s)</b><br/>
+	<%= link_to "Add address", new_address_path %><br/>
+	<ol>
+		<% current_user.user_profile.addresses.each do |address| %>
+			<li><b><%= address.title %></b><br/>
+				<%= address.address %><br/>
+				<b>Landmark</b> - <%= address.landmark %>
+			</li>
+			<br/>
+		<% end %>
+	</ol>
+<% end %>

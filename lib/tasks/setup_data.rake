@@ -38,8 +38,8 @@ task :setup_data => :environment do
 	end
 
 	# Create user_profile
-	UserProfile.create(name: "Admin", date_of_birth: "1996-08-13", mobile: "9945904839", user_id: User.first)
-	UserProfile.create(name: "Tejas", date_of_birth: "1993-07-27", mobile: "9900176115", user_id: User.second)
+	UserProfile.create(name: "Admin", date_of_birth: "1996-08-13", mobile: "9945904839", user_id: User.first.id)
+	UserProfile.create(name: "Tejas", date_of_birth: "1993-07-27", mobile: "9900176115", user_id: User.second.id)
 
 	# Create products
 	100.times do
@@ -75,7 +75,7 @@ task :setup_data => :environment do
 
 	# Create reviews
 	100.times do
-		Review.create(title: Faker::Lorem.sentence, rating: [1,2,3,4,5].sample, body: Faker::Lorem.sentences, user_profile_id: UserProfile.all.pluck(:id).sample, product_id: Product.all.pluck(:id).sample)
+		Review.create(title: Faker::Lorem.sentence, rating: [1,2,3,4,5].sample, body: Faker::Lorem.paragraph, user_profile_id: UserProfile.all.pluck(:id).sample, product_id: Product.all.pluck(:id).sample)
 	end
 
 end
