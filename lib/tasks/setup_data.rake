@@ -34,7 +34,7 @@ task :setup_data => :environment do
 
 	# Create sizes
 	50.times do
-		Size.create(name: ["s","m","l","xl","xxl"], category_id: Category.all.pluck(:id).sample)
+		Size.create(name: ["s","m","l","xl","xxl"].sample, category_id: Category.all.pluck(:id).sample)
 	end
 
 	# Create user_profile
@@ -42,7 +42,7 @@ task :setup_data => :environment do
 	UserProfile.create(name: "Tejas", date_of_birth: "1993-07-27", mobile: "9900176115", user_id: User.second)
 
 	# Create products
-	1.times do
+	100.times do
 		product = Product.new
 		product.name = Faker::Commerce.product_name
 		product.price = Faker::Number.between(500, 5000)
@@ -66,7 +66,11 @@ task :setup_data => :environment do
 
 	# Create product sizes
 	100.times do 
-		ProductSize.create(product_id: Product.all.pluck(:id).sample, size_id: Size.all.pluck(:id).sample)
+		p_size = ProductSize.new
+		product = Product.order("RANDOM()").first
+		p_size.product_id = product.id
+		p_size.size_id = product.category.sizes.sample
+		p_size.save
 	end
 
 	# Create reviews
