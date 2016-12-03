@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :order_line_items
   get '/cart_line_items/empty_cart'
   resources :orders
-  devise_for :users, controller: {registrations: 'registrations'}
+  devise_for :users, controllers: {registrations: 'registrations'}
 
   resources :brands
   resources :categories  

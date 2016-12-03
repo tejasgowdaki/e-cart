@@ -9,8 +9,15 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-    def role?(role)
-    	self.roles.pluck(:name).include? role
-    end
+  after_create :generate_role
+
+
+  def generate_role
+    Permission.create(user_id: self.id, role_id: Role.last.id)
+  end
+
+  def role?(role)
+    self.roles.pluck(:name).include? role
+   end
          
 end

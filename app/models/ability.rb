@@ -3,9 +3,8 @@ class Ability
 
   def initialize(user)
 
-    user ||= User.new
 
-    if user.new_record?
+    if user.nil?
         can :read, [Product, Category, SubCategory, Brand, Review]
     elsif user.role? "admin"
         can :manage, :all
@@ -13,9 +12,7 @@ class Ability
 
         # Read
         can :read, [Product, Category, SubCategory, Brand, Review]
-        can :read, Order do |order|
-            order.try(:user) == user
-        end
+        can :read, Order 
         can :read, OrderLineItem do |order_line_item|
             order_line_item.try(:user) == user
         end
@@ -30,9 +27,8 @@ class Ability
         end
 
         # Create
-        can :create, Order do |order|
-            order.try(:user) == user
-        end
+        can :create, Order 
+
         can :create, OrderLineItem do |order_line_item|
             order_line_item.try(:user) == user
         end
@@ -45,9 +41,7 @@ class Ability
         can :create, Address do |address|
             address.try(:user) == user
         end
-        can :create, UserProfile do |user_profile|
-            user_profile.try(:user) == user
-        end
+        can :create, UserProfile
 
          # Update
         can :update, CartLineItem do |cart_line_item|
