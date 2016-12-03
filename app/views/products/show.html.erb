@@ -5,7 +5,7 @@
 <%= link_to @product.category.name, category_path(@product.sub_category.id) %>
 
 <br/><br/>
-
+<%= image_tag(@product.cover.url) if @product.cover %><br/><br/>
 Price : <%= @product.price %><br/><br/>
 Sizes : <% @product.sizes.each do |size| %>
 			<%= size.name %>, 	

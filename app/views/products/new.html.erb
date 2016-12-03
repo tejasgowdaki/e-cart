@@ -26,7 +26,9 @@
 	<%= f.label :sub_category_id %><br/>
 	<%= f.collection_select :sub_category_id, SubCategory.all, :id, :name, prompt: "Select category" %><br/>
 	<%= f.label :brand_id %><br/>
-	<%= f.collection_select :brand_id, Brand.all, :id, :name, prompt: "Select category" %><br/><br/>
+	<%= f.collection_select :brand_id, Brand.all, :id, :name, prompt: "Select category" %><br/>
+	<%= f.label :cover %><br/>
+	<%= f.file_field :cover %><br/><br/>
 
 	<%= f.submit %>
 <% end %>

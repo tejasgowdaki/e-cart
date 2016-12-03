@@ -1,5 +1,7 @@
 class Product < ActiveRecord::Base
 
+	mount_uploader :cover, CoverUploader
+
 	belongs_to :category
 	belongs_to :sub_category
 	belongs_to :brand
