@@ -35,7 +35,7 @@
 	<br/>
 	<b>Total : Rs. <%= cart_total %></b>
 	<br/><br/>
-	<% if @cart_line_items.user_profile.addresses.nil? %>
+	<% if current_user.user_profile.addresses.nil? %>
 		<%= link_to "Add address", new_address_path %>
 	<% else %>
 		<%= form_for @order do |f| %>
