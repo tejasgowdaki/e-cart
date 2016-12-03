@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+
+  
+  get '/orders/cancel_order'
+
   resources :order_line_items
   get '/cart_line_items/empty_cart'
   resources :orders

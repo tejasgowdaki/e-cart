@@ -1,7 +1,10 @@
 <br/><br/>
 <b>Name</b> : <%= @user_profile.name.capitalize %><br/>
 <b>Mobile</b> : <%= @user_profile.mobile %><br/>
-<b>Date of birth</b> : <%= @user_profile.date_of_birth %><br/><br/>
+<b>Date of birth</b> : <%= @user_profile.date_of_birth %><br/>
+<% if can? :update, @user_profile %>
+	<%= link_to "Edit", edit_user_profile_path(@user_profile.id) %><br/><br/>
+<% end %>
 
 <b>Address(s)</b><br/>
 <%= link_to "Add address", new_address_path %><br/>
@@ -10,6 +13,8 @@
 		<li><b><%= address.title %></b><br/>
 			<%= address.address %><br/>
 			<b>Landmark</b> - <%= address.landmark %>
+			<%= link_to "Edit", edit_address_path(address.id) %> |
+			<%= link_to "Remove", address_path(address.id), method: :delete, data: {confirm: "Are you sure"} %>
 		</li>
 		<br/>
 	<% end %>

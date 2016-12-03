@@ -31,9 +31,11 @@ class OrdersController < ApplicationController
     @order.user_profile_id = current_user.user_profile.id
     @order.order_number = "ecomm-#{Random.rand(1000..9999)}"
     @order.order_date = Date.today
+    @order.order_status = "Order placed"
 
     respond_to do |format|
       if @order.save
+        Notification.order_placed(@order).deliver
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
@@ -65,6 +67,13 @@ class OrdersController < ApplicationController
       format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def cancel_order
+    @order = Order.find(params[:order_id])
+    @order.update_attributes(order_status: "Canceled")
+    Notification.order_canceled(@order).deliver
+    redirect_to @order, notice: 'Order was successfully updated.' 
   end
 
   private

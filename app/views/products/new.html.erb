@@ -20,7 +20,7 @@
 	<%= f.label :stock %><br/>
 	<%= f.number_field :stock %><br/>
 	<%= f.label :availability_date %><br/>
-	<%= f.date_select :availability_date %><br/>
+	<%= f.date_select :availability_date, order: [:day, :month, :year] %><br/>
 	<%= f.label :category_id %><br/>
 	<%= f.collection_select :category_id, Category.all, :id, :name, prompt: "Select category" %><br/>
 	<%= f.label :sub_category_id %><br/>

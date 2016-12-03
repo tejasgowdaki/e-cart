@@ -25,6 +25,9 @@ class Ability
         can :read, UserProfile do |user_profile|
             user_profile.try(:user) == user
         end
+        can :read, Address do |address|
+            address.try(:user) == user
+        end
 
         # Create
         can :create, Order do |order|
@@ -45,11 +48,11 @@ class Ability
         can :create, UserProfile do |user_profile|
             user_profile.try(:user) == user
         end
+
+         # Update
         can :update, CartLineItem do |cart_line_item|
             cart_line_item.try(:user) == user
         end
-
-        # Update
         can :update, Review do |review|
             review.try(:user) == user
         end
@@ -60,7 +63,7 @@ class Ability
             user_profile.try(:user) == user
         end
 
-        # Update
+        # Destroy
         can :destroy, CartLineItem do |cart_line_item|
             cart_line_item.try(:user) == user
         end

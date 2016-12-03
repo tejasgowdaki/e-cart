@@ -1,7 +1,7 @@
 class AddressesController < ApplicationController
 
 	before_action :authenticate_user!
-	load_and_authorize_resource
+	load_and_authorize_resource except: [:create]
 
 	def index
 		@addresses = Address.all
@@ -28,7 +28,7 @@ class AddressesController < ApplicationController
 	def update
 		@address = Address.find(params[:id])
 		if @address.update_attributes(address_param)
-			redirect_to addresses_path
+			redirect_to user_profile_path(@address.user_profile_id)
 		else
 			render action: "edit"
 		end
@@ -37,7 +37,7 @@ class AddressesController < ApplicationController
 	def destroy
 		@address = Address.find(params[:id])
 		@address.destroy
-		redirect_to addresses_path
+		redirect_to user_profile_path(current_user.user_profile.id)
 	end
 
 	private
