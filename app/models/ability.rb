@@ -38,9 +38,8 @@ class Ability
         can :create, Review do |review|
             review.try(:user) == user
         end
-        can :create, Address do |address|
-            address.try(:user) == user
-        end
+        can :create, Address 
+        
         can :create, UserProfile
 
          # Update
