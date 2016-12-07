@@ -4,6 +4,14 @@ class OrdersController < ApplicationController
   load_and_authorize_resource
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
+
+  respond_to do |format|
+    format.html
+    format.pdf do
+      render pdf: “/orders/show.pdf.erb”
+    end
+  end
+
   # GET /orders
   # GET /orders.json
   def index
