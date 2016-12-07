@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
 
 
 	def index
-		@products = Product.all.limit(20)
+		@products = Product.all.where('availability_date <= ?', Date.today ).limit(20)
 	end
 
 	def new
