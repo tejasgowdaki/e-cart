@@ -1,6 +1,6 @@
 <% if current_user.role? "admin" %>
 	<h3>Users list</h3>	
-	<ol>
+	<ul>
 		<% @user_profiles.each do |user| %>
 			<li>
 				<% if can? :read, user %>
@@ -8,7 +8,7 @@
 				<% end %>	
 			</li>
 		<% end %>
-	</ol>	
+	</ul>	
 <% else %> 
 	<br/><br/>
 	<b>Name</b> : <%= current_user.user_profile.name.capitalize %><br/>
@@ -18,7 +18,7 @@
 	<b>Address(s)</b><br/>
 	<%= link_to "Add address", new_address_path %><br/>
 	<ol>
-		<% current_user.user_profile.addresses.each do |address| %>
+		<% current_user.addresses.each do |address| %>
 			<li><b><%= address.title %></b><br/>
 				<%= address.address %><br/>
 				<b>Landmark</b> - <%= address.landmark %>

@@ -62,8 +62,10 @@
 			          <ul class="dropdown-menu">
 			          	<% if !current_user.user_profile.nil? %>
 							<li><%= link_to "My Profile", user_profile_path(current_user.user_profile.id) %></li>
-							<li><%= link_to "My Cart (#{current_user.user_profile.cart_line_items.size})", cart_line_items_path %> </li>
+						<% else %>
+							<li><%= link_to "My Profile", new_user_profile_path %></li>
 						<% end %>
+						<li><%= link_to "My Cart (#{current_user.cart_line_items.size})", cart_line_items_path %> </li>
 			            <li><%= link_to "My Orders", order_line_items_path %></li>
 			            <li><%= link_to "Account Settings", edit_user_registration_path %></li>
 			            <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>

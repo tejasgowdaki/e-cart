@@ -5,11 +5,11 @@ task :setup_data => :environment do
 	Role.create(name: "user")
 	
 	# Creating users and assign roles
-	user = User.create(email: "admin@gmail.com", password: "9900176115")
+	user = User.create(email: "admin@gmail.com", username: "Admin", password: "9900176115")
 	user.roles.push(Role.first) #assign admin role
 	user.roles.push(Role.last) #assign user role
 
-	user = User.create(email: "tejas@gmail.com", password: "9900176115")
+	user = User.create(email: "tejas@gmail.com", username: "Tejas", password: "9900176115")
 	user.roles.push(Role.last) #assign user role
 
 	# Create categories
@@ -48,7 +48,7 @@ task :setup_data => :environment do
 		product.price = Faker::Number.between(500, 5000)
 		product.description = Faker::Lorem.paragraph
 		product.stock = Faker::Number.between(0, 100)
-		product.availability_date = Faker::Date.between(Date.today, 1.week.from_now)
+		product.availability_date = Faker::Date.between(Date.today - 1.week, 1.week.from_now)
 		category = Category.order("RANDOM()").first 
 		product.category_id = category.id 
 		product.sub_category_id = category.sub_categories.pluck(:id).sample
@@ -61,7 +61,7 @@ task :setup_data => :environment do
 
 	# Create address
 	5.times do
-		Address.create(title: Faker::Name.first_name, address: Faker::Address.secondary_address + ", " + Faker::Address.street_address + ", " + Faker::Address.street_name + ", " + Faker::Address.city, landmark: Faker::Address.state, user_profile_id: UserProfile.all.pluck(:id).sample)
+		Address.create(title: Faker::Name.first_name, address: Faker::Address.secondary_address + ", " + Faker::Address.street_address + ", " + Faker::Address.street_name + ", " + Faker::Address.city, landmark: Faker::Address.state, user_id: User.all.pluck(:id).sample)
 	end
 
 	# Create product sizes
@@ -75,7 +75,7 @@ task :setup_data => :environment do
 
 	# Create reviews
 	100.times do
-		Review.create(title: Faker::Lorem.sentence, rating: [1,2,3,4,5].sample, body: Faker::Lorem.paragraph, user_profile_id: UserProfile.all.pluck(:id).sample, product_id: Product.all.pluck(:id).sample)
+		Review.create(title: Faker::Lorem.sentence, rating: [1,2,3,4,5].sample, body: Faker::Lorem.paragraph, user_id: User.all.pluck(:id).sample, product_id: Product.all.pluck(:id).sample)
 	end
 
 end

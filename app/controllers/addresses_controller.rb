@@ -4,7 +4,7 @@ class AddressesController < ApplicationController
 	load_and_authorize_resource except: [:create]
 
 	def index
-		@addresses = Address.all
+		@addresses = current_user.addresses
 	end
 
 	def new
@@ -13,9 +13,9 @@ class AddressesController < ApplicationController
 
 	def create
 		@address = Address.new(address_param)
-		@address.user_profile_id = User.find(current_user.id).user_profile.id
+		@address.user_id = current_user.id
 		if @address.save
-			redirect_to user_profile_path(@address.user_profile_id)
+			redirect_to user_profile_path(@address.user.user_profile.id)
 		else
 			render action: "new"
 		end
@@ -28,7 +28,7 @@ class AddressesController < ApplicationController
 	def update
 		@address = Address.find(params[:id])
 		if @address.update_attributes(address_param)
-			redirect_to user_profile_path(@address.user_profile_id)
+			redirect_to user_profile_path(@address.user.user_profile.id)
 		else
 			render action: "edit"
 		end

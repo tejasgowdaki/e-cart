@@ -9,7 +9,7 @@
 <b>Address(s)</b><br/>
 <%= link_to "Add address", new_address_path %><br/>
 <ol>
-	<% @user_profile.addresses.each do |address| %>
+	<% @user_profile.user.addresses.each do |address| %>
 		<li><b><%= address.title %></b><br/>
 			<%= address.address %><br/>
 			<b>Landmark</b> - <%= address.landmark %>

@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = current_user.user_profile.orders
+    @orders = current_user.orders
   end
 
   # GET /orders/1
@@ -36,7 +36,7 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-    @order.user_profile_id = current_user.user_profile.id
+    @order.user_id = current_user.id
     @order.order_number = "ecomm-#{Random.rand(1000..9999)}"
     @order.order_date = Date.today
     @order.order_status = "Order placed"
@@ -92,6 +92,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:order_number, :order_date, :total, :order_status, :payment_mode, :user_profile_id, :address_id)
+      params.require(:order).permit(:order_number, :order_date, :total, :order_status, :payment_mode, :user_id, :address_id)
     end
 end

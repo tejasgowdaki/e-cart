@@ -28,18 +28,10 @@ class Ability
 
         # Create
         can :create, Order 
-
-        can :create, OrderLineItem do |order_line_item|
-            order_line_item.try(:user) == user
-        end
-        can :create, CartLineItem do |cart_line_item|
-            cart_line_item.try(:user) == user
-        end
-        can :create, Review do |review|
-            review.try(:user) == user
-        end
-        can :create, Address 
-        
+        can :create, OrderLineItem 
+        can :create, CartLineItem 
+        can :create, Review 
+        can :create, Address         
         can :create, UserProfile
 
          # Update

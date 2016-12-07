@@ -1,8 +1,8 @@
-<p>Hi <%= @order.user_profile.name %>, </p>
+<p>Hi <%= @order.user.user_profile.name %>, </p>
 	<p>Your order has been placed successfully</p>
 	Order number - <%= @order.order_number %>
 	Ordered date - <%= @order.order_date %>
 	Total amount - Rs. <%= @order.total %>
-	<p>The product is shipping to your <%= @order.address.title %> address</p>
+	<p>The product is shipping to your <%= @order.address.title %> address.</p>
 <p>Regards,<br/>
 e-comm.noreplay@ecomm.com</p>

@@ -11,15 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161203073259) do
+ActiveRecord::Schema.define(version: 20161207061000) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "title"
     t.text     "address"
     t.string   "landmark"
-    t.integer  "user_profile_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
 
   create_table "brand_categories", force: :cascade do |t|
@@ -39,9 +39,9 @@ ActiveRecord::Schema.define(version: 20161203073259) do
     t.float    "price"
     t.integer  "quantity"
     t.integer  "product_id"
-    t.integer  "user_profile_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -55,9 +55,9 @@ ActiveRecord::Schema.define(version: 20161203073259) do
     t.integer  "quantity"
     t.integer  "order_id"
     t.integer  "product_id"
-    t.integer  "user_profile_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -66,10 +66,10 @@ ActiveRecord::Schema.define(version: 20161203073259) do
     t.float    "total"
     t.string   "order_status"
     t.string   "payment_mode"
-    t.integer  "user_profile_id"
     t.integer  "address_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "user_id"
   end
 
   create_table "permissions", force: :cascade do |t|
@@ -104,10 +104,10 @@ ActiveRecord::Schema.define(version: 20161203073259) do
     t.string   "title"
     t.integer  "rating"
     t.text     "body"
-    t.integer  "user_profile_id"
     t.integer  "product_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
 
   create_table "roles", force: :cascade do |t|

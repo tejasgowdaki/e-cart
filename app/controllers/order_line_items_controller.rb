@@ -7,7 +7,7 @@ class OrderLineItemsController < ApplicationController
   # GET /order_line_items
   # GET /order_line_items.json
   def index
-    @order_line_items = current_user.user_profile.order_line_items
+    @order_line_items = current_user.order_line_items
   end
 
   # GET /order_line_items/1
@@ -72,6 +72,6 @@ class OrderLineItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_line_item_params
-      params.require(:order_line_item).permit(:price, :quantity, :order_id, :product_id, :user_profile_id)
+      params.require(:order_line_item).permit(:price, :quantity, :order_id, :product_id, :user_id)
     end
 end

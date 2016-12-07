@@ -35,7 +35,7 @@
 	<br/>
 	<b>Total : Rs. <%= cart_total %></b>
 	<br/><br/>
-	<% if current_user.user_profile.addresses.nil? %>
+	<% if current_user.addresses.nil? %>
 		<%= link_to "Add address", new_address_path %>
 	<% else %>
 		<%= form_for @order do |f| %>
@@ -55,7 +55,7 @@
 			<%= f.radio_button :payment_mode, "Card" %> Card
 			<br/>
 			<%= f.label :address_id %><br/>
-			<% current_user.user_profile.addresses.each do |address| %>
+			<% current_user.addresses.each do |address| %>
 				<%= f.radio_button :address_id, address.id %> <%= address.title %>
 			<% end %>
 			<br/><br/>
