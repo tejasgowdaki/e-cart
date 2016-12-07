@@ -13,27 +13,27 @@ task :setup_data => :environment do
 	user.roles.push(Role.last) #assign user role
 
 	# Create categories
-	10.times do
+	3.times do
 		Category.create(name: Faker::Commerce.department(2, true))
 	end
 
 	# Create subcategories
-	20.times do
+	5.times do
 		SubCategory.create(name: Faker::Commerce.department(1, true), category_id: Category.all.pluck(:id).sample)
 	end
 
 	# Create brands
-	10.times do 
+	5.times do 
 		Brand.create(name: Faker::GameOfThrones.house)
 	end
 
 	# Create brang_categories
-	20.times do
+	10.times do
 		BrandCategory.create(category_id: Category.all.pluck(:id).sample, brand_id: Brand.all.pluck(:id).sample)
 	end
 
 	# Create sizes
-	50.times do
+	10.times do
 		Size.create(name: ["s","m","l","xl","xxl"].sample, category_id: Category.all.pluck(:id).sample)
 	end
 
@@ -42,13 +42,13 @@ task :setup_data => :environment do
 	UserProfile.create(name: "Tejas", date_of_birth: "1993-07-27", mobile: "9900176115", user_id: User.second.id)
 
 	# Create products
-	100.times do
+	20.times do
 		product = Product.new
 		product.name = Faker::Commerce.product_name
 		product.price = Faker::Number.between(500, 5000)
 		product.description = Faker::Lorem.paragraph
 		product.stock = Faker::Number.between(0, 100)
-		product.availability_date = Faker::Date.between(Date.today - 1.week, 1.week.from_now)
+		product.availability_date = Faker::Date.between(Date.today - 1.week, 3.days.from_now)
 		category = Category.order("RANDOM()").first 
 		product.category_id = category.id 
 		product.sub_category_id = category.sub_categories.pluck(:id).sample
@@ -65,7 +65,7 @@ task :setup_data => :environment do
 	end
 
 	# Create product sizes
-	100.times do 
+	40.times do 
 		p_size = ProductSize.new
 		product = Product.order("RANDOM()").first
 		p_size.product_id = product.id
@@ -74,7 +74,7 @@ task :setup_data => :environment do
 	end
 
 	# Create reviews
-	100.times do
+	50.times do
 		Review.create(title: Faker::Lorem.sentence, rating: [1,2,3,4,5].sample, body: Faker::Lorem.paragraph, user_id: User.all.pluck(:id).sample, product_id: Product.all.pluck(:id).sample)
 	end
 

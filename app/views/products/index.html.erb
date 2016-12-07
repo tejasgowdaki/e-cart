@@ -1,23 +1,40 @@
-<h2>Products list</h2>
-<% if can? :create, Product.new %> 
+<% if can? :create, Product %>
 	<%= link_to "Add product", new_product_path %>
-<% end %> 
-<ol>
+<% end %>
+<div class="row">
+	<div class="page-header">
+		<h2>Trending Products</h2>
+	</div>
 	<% @products.each do |product| %>
-		<li><%= link_to product.name, product_path(product.id) %><br/>
-			Price : <%= product.price %><br/>
-			<% if product.availability_date > Date.today %>
-				Available from : <%= product.availability_date %>
-			<% else %>
-				In stock
-			<% end %>
-			<% if can? :update, product %>
-				<%= link_to "Edit", edit_product_path(product.id) %> 
-			<% end %> 
-			<% if can? :destroy, product %>
-				<%= link_to "Delete", product_path(product.id), method: :delete, data: {confirm: "Are you sure"} %>
-			<% end %>
-			<br/><br/>
-		</li>
+		<div class="col-md-4">
+
+			<div class="thumbnail">
+
+				<%= image_tag(product.cover.url, height:"200", width:"200") if product.cover %>
+
+				<div class="caption">
+
+					<%= link_to product.name, product_path(product.id) %><br/>
+					Price : <%= product.price %><br/>
+					<% if product.availability_date > Date.today %>
+						Available from : <%= product.availability_date %>
+					<% else %>
+						In stock
+					<% end %>
+					<% if can? :update, product %>
+						<%= link_to "Edit", edit_product_path(product.id) %> 
+					<% end %> 
+					<% if can? :destroy, product %>
+						<%= link_to "Delete", product_path(product.id), method: :delete, data: {confirm: "Are you sure"} %>
+					<% end %>
+					<br/><br/>
+
+				</div>
+
+			</div>
+
+		</div>
 	<% end %>
-</ol>
+
+</div>
+
