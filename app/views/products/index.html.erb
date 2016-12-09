@@ -8,9 +8,8 @@
 	<% @products.each do |product| %>
 		<div class="col-md-4">
 
-			<div class="thumbnail">
 
-				<%= image_tag(product.cover.url, height:"200", width:"200") if product.cover %>
+				<%= image_tag(product.cover.url, height:"250", width:"250") if product.cover %>
 
 				<div class="caption">
 
@@ -30,8 +29,6 @@
 					<br/><br/>
 
 				</div>
-
-			</div>
 
 		</div>
 	<% end %>

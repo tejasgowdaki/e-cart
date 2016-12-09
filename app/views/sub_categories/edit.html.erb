@@ -1,9 +1,8 @@
-<h3>Edit Sub category details</h3>
-<%= form_for @sub_category do |f| %>
-	<%= f.label :name %><br/>
-	<%= f.text_field :name %><br/>
-	<%= f.label :category %><br/>
-	<%= f.collection_select :category_id, Category.all, :id, :name, prompt: "Select category" %><br/><br/>
-	<%= f.submit %>
-<% end %>
+<div class="page-header">
+	<h2>Edit Sub-category</h2>
+</div>
+
+<div class="col-md-6">
+	<%= render 'form' %>
+</div>
 

@@ -1,0 +1,77 @@
+<%= form_for @product do |f| %>
+	<% if @product.errors.any? %>
+		<div class = "alert alert-danger">
+			<ul>
+				<% @product.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+
+	<div class="form-group">
+		<%= f.label :name %>
+		<%= f.text_field :name, class: "form-control" %>
+	</div>
+	
+	<div class="form-group">
+		<%= f.label :price %>
+		<%= f.number_field :price, class: "form-control" %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :description %>
+		<%= f.text_area :description, class: "form-control" %>
+	</div>	
+	
+	<%= f.label :size %><br/>
+	<%= f.collection_check_boxes :size_ids, Size.all.uniq, :id, :name do |c|%>
+		<div class="checkbox-inline ">
+				<%= c.check_box %>
+				<%= c.object.name %>
+		</div>
+	<% end %>
+	<br/><br/>
+
+	<div class="form-group">
+		<%= f.label :stock %>
+		<%= f.number_field :stock, class: "form-control" %>
+	</div>
+	
+	<%= f.label :availability_date %><br/>
+	<%= f.date_select :availability_date %><br/><br/>
+	
+	<div class="form-group">
+		<%= f.label :category_id %><br/>
+		<%= f.collection_select :category_id, Category.all, :id, :name do |s|  %>
+			<select class="form-control">		
+		  		<option><%= s.object.name %></option>	  	
+			</select>
+		<% end %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :sub_category_id %><br/>
+		<%= f.collection_select :sub_category_id, SubCategory.all, :id, :name do |s| %>
+			<select class="form-control">		
+		  		<option><%= s.object.name %></option>	  	
+			</select>
+		<% end %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :brand_id %><br/>
+		<%= f.collection_select :brand_id, Brand.all, :id, :name do |s| %>
+			<select class="form-control">		
+		  		<option><%= s.object.name %></option>	  	
+			</select>
+		<% end %>
+	</div>
+
+	<%= f.label :cover %><br/>
+	<%= f.file_field :cover %><br/>
+
+	<%= f.submit "Submit", class: "btn btn-success" %> or <%= link_to "Go Back", products_path %>
+	
+<% end %>

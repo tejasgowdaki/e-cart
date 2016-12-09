@@ -1,19 +1,7 @@
-<h3>Edit details</h3>
-<%= form_for @user_profile do |f| %>
-	<% if @user_profile.errors.any? %>
-		<div class = "errors" style = "color: red;">
-			<ul>
-				<% @user_profile.errors.full_messages.each do |msg| %>
-					<li><%= msg %></li>
-				<% end %>
-			</ul>
-		</div>
-	<% end %>
-	<%= f.label :name %><br/>
-	<%= f.text_field :name %><br/>
-	<%= f.label :mobile %><br/>
-	<%= f.text_field :mobile %><br/>
-	<%= f.label :date_of_birth %><br/>
-	<%= f.date_select :date_of_birth %><br/><br/>
-	<%= f.submit "Update" %>
-<% end %>
+<div class="page-header">
+	<h3>Edit your details</h3>
+</div>
+
+<div class="col-md-6">
+	<%= render 'form' %>
+</div>

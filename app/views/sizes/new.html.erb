@@ -1,8 +1,8 @@
-<h3>Enter size details</h3>
-<%= form_for @size do |f| %>
-	<%= f.label :name %><br/>
-	<%= f.text_field :name %><br/>
-	<%= f.label :category_id %><br/>
-	<%= f.collection_select :category_id, Category.all, :id, :name, prompt: "Select category" %><br/><br/>
-	<%= f.submit %>
-<% end %>
+<div class="page-header">
+	<h2>Add Size</h2>
+</div>
+
+<div class="col-md-6">
+	<%= render 'form' %>
+</div>
+

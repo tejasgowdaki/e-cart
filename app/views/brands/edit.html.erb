@@ -1,17 +1,9 @@
-<h2>Edit brand</h2>
-<%= form_for @brand do |f| %>
-	<% if @brand.errors.any? %>
-		<div class = "errors" style = "color: red;">
-			<ul>
-				<% @brand.errors.full_messages.each do |msg| %>
-					<li><%= msg %></li>
-				<% end %>
-			</ul>
-		</div>
-	<% end %>
-	<%= f.label :name %><br/><br/>
-	<%= f.text_field :name %><br/>
-	<%= f.label :categories %><br/>
-	<%= f.collection_check_boxes :category_ids, Category.all, :id, :name %><br/><br/>
-	<%= f.submit %>
-<% end %>
+<div class="page-header">
+	<h2>Edit Brand</h2>
+</div>
+
+<div class="col-md-6">
+	<%= render 'form' %>
+</div>
+
+
